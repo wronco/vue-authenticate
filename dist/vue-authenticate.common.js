@@ -1054,7 +1054,8 @@ OAuth2.prototype.init = function init (userData) {
     this.storage.setItem(stateName, this.providerConfig.state);
   }
 
-  var url = [this.providerConfig.authorizationEndpoint, this._stringifyRequestParams()].join('?');
+  var endpoint = (typeof userData.authorizationEndpoint !== "undefined") ? userData.authorizationEndpoint : this.providerConfig.authorizationEndpoint;
+  var url = [endpoint, this._stringifyRequestParams()].join('?');
 
   this.oauthPopup = new OAuthPopup(url, this.providerConfig.name, this.providerConfig.popupOptions);
     

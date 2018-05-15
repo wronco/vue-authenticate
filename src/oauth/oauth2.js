@@ -44,7 +44,8 @@ export default class OAuth2 {
       this.storage.setItem(stateName, this.providerConfig.state)
     }
 
-    let url = [this.providerConfig.authorizationEndpoint, this._stringifyRequestParams()].join('?')
+    let endpoint = (typeof userData.authorizationEndpoint !== "undefined") ? userData.authorizationEndpoint : this.providerConfig.authorizationEndpoint
+    let url = [endpoint, this._stringifyRequestParams()].join('?')
 
     this.oauthPopup = new OAuthPopup(url, this.providerConfig.name, this.providerConfig.popupOptions)
     
